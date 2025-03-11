@@ -1,0 +1,11 @@
+flask
+google-generativeai
+python-dotenv
+fpdf
+ollama
+gradio
+googletrans
+reportlab
+streamlit==1.15.2
+streamlit-chat==0.1.1
+speechrecognition==3.8.1
