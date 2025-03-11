@@ -2,7 +2,6 @@ import streamlit as st
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
-import speech_recognition as sr
 from streamlit_chat import message
 
 load_dotenv()  # Load environment variables from .env file (if any)
@@ -35,21 +34,6 @@ def generate_response(msg: str, history: list[list[str, str]], system_prompt: st
         message += chunk.text
     return message
 
-def recognize_speech():
-    recognizer = sr.Recognizer()
-    with sr.Microphone() as source:
-        st.info("Listening...")
-        audio = recognizer.listen(source)
-    try:
-        text = recognizer.recognize_google(audio)
-        st.success(f"Recognized: {text}")
-        return text
-    except sr.UnknownValueError:
-        st.error("Could not understand audio")
-    except sr.RequestError as e:
-        st.error(f"Could not request results; {e}")
-    return ""
-
 st.title("AI Chatbot")
 st.write("Feel free to ask any question.")
 
@@ -62,20 +46,7 @@ polite to users while talking.
 if "history" not in st.session_state:
     st.session_state.history = []
 
-# Add buttons for recording and pausing
-if "recording" not in st.session_state:
-    st.session_state.recording = False
-
-if st.button("Record"):
-    st.session_state.recording = True
-
-if st.button("Pause"):
-    st.session_state.recording = False
-
 user_input = st.text_input("You:")
-
-if st.session_state.recording:
-    user_input = recognize_speech()
 
 if user_input:
     st.session_state.history.append([user_input, ""])
