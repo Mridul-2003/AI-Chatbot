@@ -8,5 +8,5 @@ googletrans
 reportlab
 streamlit
 streamlit-chat
-speechrecognition
-pyaudio
+speechrecognition==3.8.1
+pyaudio==0.2.11
