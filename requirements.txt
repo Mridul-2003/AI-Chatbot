@@ -9,3 +9,4 @@ reportlab
 streamlit
 streamlit-chat
 speechrecognition
+pyaudio
